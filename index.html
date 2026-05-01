@@ -1,0 +1,2969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loop — Reusable Moving Bins, Delivered to Your Door</title>
+<meta name="description" content="Loop rents heavy-duty reusable moving bins. We deliver to your door, you pack at your pace, we pick them up. No cardboard, no recycling pile, no stress." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   LOOP — Toronto Reusable Moving Bins
+   Editorial redesign · cream + moss + ink
+   ========================================================= */
+
+:root {
+  /* Palette */
+  --cream: #F5EFE3;
+  --cream-warm: #EDE5D2;
+  --cream-deep: #E5DBC2;
+  --paper: #FAF6EC;
+  --ink: #1A1A18;
+  --ink-soft: #3D3D3A;
+  --ink-mute: #6E6E68;
+  --moss: #3F5A3A;
+  --moss-deep: #2A3F26;
+  --moss-light: #6F8A66;
+  --moss-pale: #C8D4BE;
+  --orange: #D7522D;
+  --orange-soft: #E07A57;
+  --orange-pale: #F2D5C8;
+  --bin-blue: #2B4B8A;
+  --paper-line: rgba(26, 26, 24, 0.10);
+  --paper-line-soft: rgba(26, 26, 24, 0.06);
+
+  /* Shadows */
+  --shadow-soft: 0 1px 2px rgba(26,26,24,0.04), 0 8px 24px rgba(26,26,24,0.06);
+  --shadow-lift: 0 1px 2px rgba(26,26,24,0.06), 0 16px 40px rgba(26,26,24,0.10);
+  --shadow-photo: 0 1px 2px rgba(26,26,24,0.08), 0 30px 60px rgba(26,26,24,0.18);
+
+  /* Radii */
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 22px;
+
+  /* Layout */
+  --max: 1240px;
+  --max-narrow: 980px;
+  --max-wide: 1400px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--cream);
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* paper grain overlay */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+main, nav, footer { position: relative; z-index: 2; }
+
+/* Type system */
+h1, h2, h3, h4, h5 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.8rem, 9vw, 7rem); }
+h2 { font-size: clamp(2.2rem, 5.5vw, 4.2rem); }
+h3 { font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 500; line-height: 1.1; }
+h4 { font-size: 1.25rem; font-weight: 500; line-height: 1.2; }
+h5 { font-size: 1rem; font-weight: 500; line-height: 1.2; }
+p { color: var(--ink-soft); text-wrap: pretty; }
+a { color: inherit; }
+
+.italic, em.editorial {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* ---------- layout helpers ---------- */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+.wrap-narrow { max-width: var(--max-narrow); margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: var(--max-wide); margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) {
+  .wrap, .wrap-narrow, .wrap-wide { padding: 0 22px; }
+}
+
+.section { padding: 120px 0; }
+.section-tight { padding: 70px 0; }
+@media (max-width: 768px) { .section { padding: 80px 0; } }
+
+.eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--moss);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: ""; width: 28px; height: 1px; background: currentColor;
+}
+.eyebrow.no-line::before { display: none; }
+.eyebrow.orange { color: var(--orange); }
+.eyebrow.cream { color: var(--moss-pale); }
+
+.kicker {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  color: var(--moss);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Hairline rules / dividers */
+.rule {
+  height: 1px; background: var(--paper-line); width: 100%;
+}
+.rule-thick { height: 2px; background: var(--ink); width: 64px; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 24px;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, background 0.2s, box-shadow 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--ink); color: var(--cream);
+}
+.btn-primary:hover { background: var(--moss-deep); transform: translateY(-1px); }
+.btn-orange {
+  background: var(--orange); color: var(--cream);
+}
+.btn-orange:hover { background: #C4451E; transform: translateY(-1px); box-shadow: var(--shadow-lift); }
+.btn-ghost {
+  background: transparent; color: var(--ink); border: 1px solid var(--ink);
+}
+.btn-ghost:hover { background: var(--ink); color: var(--cream); }
+.btn-ghost-cream {
+  background: transparent; color: var(--cream); border: 1px solid rgba(245,239,227,0.5);
+}
+.btn-ghost-cream:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.btn-arrow::after { content: "→"; font-size: 1.05em; transition: transform 0.2s; }
+.btn-arrow:hover::after { transform: translateX(3px); }
+.btn-sm { padding: 9px 16px; font-size: 0.85rem; }
+.btn-lg { padding: 17px 30px; font-size: 1.02rem; }
+
+/* ---------- nav ---------- */
+nav.top {
+  position: sticky; top: 0;
+  background: rgba(245, 239, 227, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 100;
+  border-bottom: 1px solid var(--paper-line-soft);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 32px;
+  max-width: var(--max-wide); margin: 0 auto;
+  gap: 24px;
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.65rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-mark {
+  width: 30px; height: 30px;
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.logo-mark::before, .logo-mark::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.logo-mark::before {
+  width: 100%; height: 100%;
+  border: 2.5px solid var(--moss);
+}
+.logo-mark::after {
+  width: 8px; height: 8px;
+  background: var(--orange);
+  bottom: 1px; right: 1px;
+}
+.nav-meta {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-mute);
+  letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+.nav-meta::before {
+  content: ""; width: 4px; height: 4px; background: var(--orange);
+  border-radius: 50%; display: inline-block;
+}
+.nav-links { display: flex; gap: 24px; align-items: center; font-size: 0.93rem; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--moss); }
+@media (max-width: 880px) {
+  .nav-meta { display: none; }
+  .nav-links a:not(.btn) { display: none; }
+}
+
+/* =========================================================
+   HERO — editorial magazine cover
+   ========================================================= */
+.hero {
+  padding: 56px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-meta-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 18px;
+  margin-bottom: 56px;
+  border-bottom: 1px solid var(--paper-line);
+  flex-wrap: wrap;
+}
+.hero-meta-row .vol {
+  font-weight: 500;
+  color: var(--ink);
+  font-style: normal;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.hero-meta-row .city-time {
+  display: flex; gap: 16px; align-items: center;
+}
+.hero-meta-row .city-time .dot {
+  width: 6px; height: 6px; background: var(--moss); border-radius: 50%;
+  display: inline-block;
+}
+
+.hero-headline-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.hero-headline-row .eyebrow { margin: 0; }
+
+/* Big editorial display headline — full width */
+.hero-display {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 7.2rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin: 0 0 28px;
+  font-variation-settings: "opsz" 144;
+  max-width: 1200px;
+}
+.hero-display .accent {
+  color: var(--moss);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.hero-display .underline {
+  position: relative;
+  display: inline-block;
+  margin-left: -0.04em;
+}
+.hero-display .underline::after {
+  content: "";
+  position: absolute;
+  left: 4%; right: 4%;
+  bottom: 0.05em;
+  height: 0.18em;
+  background: var(--orange);
+  z-index: -1;
+  opacity: 0.85;
+  border-radius: 2px;
+}
+
+/* Running typographic ticker under the headline */
+.hero-ticker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: var(--ink-mute);
+  letter-spacing: -0.01em;
+  margin-bottom: 56px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--paper-line);
+  max-width: 1200px;
+}
+.hero-ticker .tdot {
+  color: var(--orange);
+  font-style: normal;
+  font-size: 0.6em;
+  opacity: 0.7;
+}
+
+/* Body grid — left = lede + CTAs + trust; right = kit card + team note */
+.hero-body-grid {
+  display: block;
+}
+
+.hero-body-left { max-width: 720px; }
+
+.hero-lead {
+  font-size: 1.18rem;
+  margin-bottom: 28px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+
+/* Trust ribbons — colorful flag-style chips */
+.hero-trust {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.ribbon {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: 'Manrope', sans-serif;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px -4px rgba(26,26,24,0.18), 0 0 0 1px rgba(26,26,24,0.06);
+  position: relative;
+  isolation: isolate;
+  letter-spacing: -0.005em;
+}
+.ribbon::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: rgba(0,0,0,0.18);
+}
+.ribbon .ribbon-k {
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 9px 14px 9px 18px;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+}
+.ribbon .ribbon-frac {
+  font-weight: 500;
+  opacity: 0.7;
+  font-size: 0.78em;
+  margin-left: 1px;
+}
+.ribbon .ribbon-v {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 9px 16px 9px 14px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--paper);
+  color: var(--ink-soft);
+  border-left: 1px dashed rgba(26,26,24,0.15);
+}
+.ribbon-orange .ribbon-k { background: var(--orange); color: var(--cream); }
+.ribbon-moss .ribbon-k   { background: var(--moss);   color: var(--cream); }
+
+.hero-aside {
+  position: relative;
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+/* Editorial photo plate — riso-style print, slightly rotated, layered with ephemera */
+.hero-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(180deg, #F4D7C5 0%, #EFA886 35%, #D7522D 65%, #7B3A28 100%);
+  border-radius: 4px;
+  overflow: visible;
+  box-shadow:
+    0 30px 60px -15px rgba(26,26,24,0.45),
+    0 12px 24px -8px rgba(26,26,24,0.3),
+    0 0 0 1px rgba(26,26,24,0.08);
+  transform: rotate(-1.6deg);
+  isolation: isolate;
+}
+/* paper border (like a deckle / printed edge) */
+.hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(26,26,24,0.35);
+  pointer-events: none;
+  z-index: 5;
+}
+.hero-photo .photo-content {
+  position: absolute; inset: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.hero-photo .caption {
+  position: absolute;
+  bottom: 18px; left: 24px; right: 90px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--cream);
+  font-size: 0.86rem;
+  letter-spacing: -0.01em;
+  z-index: 6;
+  line-height: 1.4;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.55);
+}
+.hero-photo .caption::before {
+  content: "↳ ";
+  color: var(--orange-pale);
+  font-style: normal;
+}
+
+/* Plate / catalogue tag — top left */
+.plate-tag {
+  position: absolute;
+  top: 22px; left: -14px;
+  background: var(--paper);
+  padding: 8px 14px 8px 16px;
+  z-index: 7;
+  transform: rotate(-3deg);
+  box-shadow: 0 6px 14px -4px rgba(0,0,0,0.25);
+  border: 1px solid var(--paper-line);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  max-width: 220px;
+}
+.plate-tag::before {
+  content: "";
+  position: absolute;
+  left: 6px; top: 50%;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translateY(-50%);
+  display: none;
+}
+.plate-tag .pt-no {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+}
+.plate-tag .pt-num {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--orange);
+  line-height: 0.9;
+  font-variation-settings: "opsz" 144;
+}
+.plate-tag .pt-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border-left: 1px solid var(--paper-line);
+  padding-left: 8px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+/* Spec callout — clean editorial corner data block */
+.spec-callout {
+  position: absolute;
+  top: 18px; right: -12px;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 14px 16px;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 168px;
+  box-shadow: 0 14px 28px -10px rgba(0,0,0,0.35);
+  border-left: 3px solid var(--orange);
+}
+.spec-callout::before {
+  content: "Spec";
+  position: absolute;
+  top: -10px; right: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid var(--paper-line);
+}
+.spec-callout .sc-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: baseline;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.74rem;
+  border-bottom: 1px dashed rgba(245,239,227,0.18);
+  padding-bottom: 5px;
+}
+.spec-callout .sc-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.spec-callout .sc-k {
+  color: rgba(245,239,227,0.6);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+}
+.spec-callout .sc-v {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  color: var(--cream);
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  text-align: right;
+}
+@media (max-width: 980px) {
+  .plate-tag { left: -8px; max-width: 200px; }
+  .spec-callout { right: -6px; min-width: 150px; padding: 12px 14px; }
+}
+
+/* polaroid-style note next to the photo */
+.hero-note {
+  position: absolute;
+  background: var(--paper);
+  border: 1px solid var(--paper-line);
+  padding: 14px 16px;
+  width: 220px;
+  font-size: 0.88rem;
+  font-family: 'Fraunces', serif;
+  line-height: 1.4;
+  color: var(--ink);
+  box-shadow: var(--shadow-lift);
+  transform: rotate(2.5deg);
+  z-index: 3;
+  bottom: -30px; left: -32px;
+}
+@media (max-width: 540px) {
+  .hero-note { left: -8px; bottom: -20px; width: 200px; }
+}
+.hero-note .stamp {
+  display: inline-block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Weather strip — pulls the city in */
+.weather-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px 8px 10px;
+  background: var(--paper);
+  border: 1px solid var(--paper-line);
+  border-radius: 100px;
+  font-size: 0.84rem;
+  margin-bottom: 14px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.weather-strip .ws-icon {
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--moss-pale);
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-style: normal;
+}
+.weather-strip strong {
+  color: var(--ink); font-weight: 500;
+}
+
+/* =========================================================
+   SECTION: For the human (intro / pull quote)
+   ========================================================= */
+.intro-pullquote {
+  background: var(--cream);
+  padding: 80px 0;
+  position: relative;
+}
+.intro-pullquote .pq-grid {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .intro-pullquote .pq-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+.intro-pullquote .pq-side {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.intro-pullquote .pq-side strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-weight: 400;
+  margin-top: 6px;
+}
+.intro-pullquote blockquote {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-weight: 400;
+}
+.intro-pullquote blockquote .open {
+  color: var(--orange);
+  font-style: italic;
+  font-size: 1.4em;
+  line-height: 0;
+  position: relative;
+  top: 0.18em;
+  margin-right: 0.05em;
+}
+.intro-pullquote blockquote em {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  color: var(--moss);
+}
+.intro-pullquote .attribution {
+  margin-top: 24px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-mute);
+}
+
+/* =========================================================
+   WHY (cards)
+   ========================================================= */
+.why { background: var(--cream-warm); border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
+.why-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+@media (max-width: 820px) {
+  .why-header { grid-template-columns: 1fr; gap: 20px; }
+}
+.why-header h2 { margin: 16px 0 0; }
+.why-header .why-intro { max-width: 460px; font-size: 1.05rem; }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--paper-line);
+  border-left: 1px solid var(--paper-line);
+}
+@media (max-width: 980px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .why-grid { grid-template-columns: 1fr; } }
+
+.why-card {
+  background: var(--cream-warm);
+  padding: 36px 32px 40px;
+  border-right: 1px solid var(--paper-line);
+  border-bottom: 1px solid var(--paper-line);
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative;
+  transition: background 0.25s;
+}
+.why-card:hover { background: var(--cream); }
+.why-card .num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--orange);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.why-card .num::before { content: "№ "; opacity: 0.7; }
+.why-card h4 { color: var(--ink); }
+.why-card p { font-size: 0.95rem; }
+.why-card .why-icon {
+  position: absolute;
+  top: 28px; right: 28px;
+  width: 36px; height: 36px;
+  color: var(--moss);
+  opacity: 0.85;
+}
+
+/* =========================================================
+   HOW IT WORKS
+   ========================================================= */
+.how h2 { max-width: 720px; margin: 18px 0 14px; }
+.how .lead { max-width: 580px; font-size: 1.1rem; margin-bottom: 72px; color: var(--ink-soft); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+@media (max-width: 880px) { .steps { grid-template-columns: 1fr 1fr; gap: 40px 20px; } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; gap: 32px; } }
+
+.step {
+  position: relative;
+  padding: 0 24px 0 0;
+}
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 36px; right: 4px;
+  width: 16px; height: 16px;
+  border-top: 1.5px solid var(--moss);
+  border-right: 1.5px solid var(--moss);
+  transform: rotate(45deg);
+  opacity: 0.45;
+}
+@media (max-width: 880px) { .step:not(:last-child)::after { display: none; } }
+
+.step .step-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--orange);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  display: block;
+}
+.step .step-num::before { content: "№ "; opacity: 0.7; }
+
+.step .step-icon {
+  width: 64px; height: 64px;
+  background: var(--cream-warm);
+  border: 1px solid var(--paper-line);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px;
+}
+.step h4 { margin-bottom: 8px; }
+.step .step-desc { font-size: 0.95rem; color: var(--ink-soft); }
+.step .step-time {
+  margin-top: 12px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--moss);
+}
+
+/* =========================================================
+   PACK ALONG (drag rooms into bins)
+   ========================================================= */
+.pack-along {
+  background: var(--paper);
+  border-top: 1px solid var(--paper-line);
+  border-bottom: 1px solid var(--paper-line);
+}
+.pa-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+@media (max-width: 820px) {
+  .pa-header { grid-template-columns: 1fr; gap: 20px; }
+}
+.pa-header h2 { margin: 16px 0 0; }
+.pa-header .pa-intro { font-size: 1.05rem; max-width: 460px; }
+
+.pa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 880px) { .pa-grid { grid-template-columns: 1fr; } }
+
+.pa-rooms {
+  background: var(--cream);
+  border: 1px solid var(--paper-line);
+  border-radius: 16px;
+  padding: 28px;
+}
+.pa-rooms h4 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 6px;
+}
+.pa-rooms .pa-help {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-mute);
+  margin-bottom: 22px;
+}
+.pa-room-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 480px) { .pa-room-list { grid-template-columns: 1fr; } }
+.pa-room {
+  background: var(--cream-warm);
+  border: 1px solid var(--paper-line);
+  border-radius: 10px;
+  padding: 12px 14px 14px;
+  cursor: grab;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  user-select: none;
+  display: flex; align-items: center; gap: 12px;
+  position: relative;
+}
+.pa-room:hover { border-color: var(--moss); box-shadow: var(--shadow-soft); }
+.pa-room:active, .pa-room.dragging { cursor: grabbing; transform: rotate(-1.5deg) scale(1.04); box-shadow: var(--shadow-lift); }
+.pa-room .pa-room-icon {
+  width: 28px; height: 28px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--moss);
+}
+.pa-room .pa-room-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  display: block;
+}
+.pa-room .pa-room-bins {
+  font-size: 0.78rem;
+  color: var(--ink-mute);
+}
+.pa-room.added::after {
+  content: "✓";
+  position: absolute;
+  top: 8px; right: 10px;
+  width: 18px; height: 18px;
+  background: var(--moss);
+  color: var(--cream);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.pa-room.added { opacity: 0.55; }
+
+/* the truck/bin stack on the right */
+.pa-truck {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  min-height: 460px;
+  display: flex; flex-direction: column;
+}
+.pa-truck h4 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moss-light);
+  margin-bottom: 6px;
+}
+.pa-truck .pa-help {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(245,239,227,0.6);
+  margin-bottom: 22px;
+}
+
+.pa-counter {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 6px;
+}
+.pa-counter .pa-bins {
+  font-family: 'Fraunces', serif;
+  font-size: 4.5rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--cream);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.pa-counter .pa-bins.filled { color: var(--orange); }
+.pa-counter .pa-suffix {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,239,227,0.55);
+}
+.pa-pkg {
+  margin-top: 4px;
+  margin-bottom: 24px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(245,239,227,0.7);
+}
+.pa-pkg strong { color: var(--cream); font-weight: 500; }
+
+/* visual stack of bins, animates as you add */
+.pa-stack {
+  flex: 1;
+  display: flex; flex-direction: column-reverse;
+  gap: 4px;
+  margin-bottom: 18px;
+  border: 1.5px dashed rgba(245,239,227,0.18);
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 200px;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+}
+.pa-stack.over {
+  border-color: var(--orange);
+  background: rgba(215,82,45,0.05);
+}
+.pa-stack-empty {
+  position: absolute;
+  inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: rgba(245,239,227,0.4);
+  text-align: center;
+  pointer-events: none;
+  font-size: 0.95rem;
+  padding: 0 30px;
+  line-height: 1.4;
+}
+.pa-stack-empty::before {
+  content: "↓"; font-style: normal; font-size: 1.6rem; margin-bottom: 8px; opacity: 0.7;
+}
+.pa-stack.has-bins .pa-stack-empty { display: none; }
+
+.pa-bin-chip {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(43,75,138,0.6);
+  border: 1px solid rgba(143,178,130,0.4);
+  color: var(--cream);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: 100%;
+  max-width: 280px;
+  animation: pa-pop 0.4s ease-out backwards;
+}
+@keyframes pa-pop {
+  from { opacity: 0; transform: translateY(-12px) scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+.pa-bin-chip .pa-bin-icon {
+  width: 18px; height: 18px;
+  flex-shrink: 0;
+  background: var(--bin-blue);
+  border-radius: 3px;
+  border-top: 3px solid var(--moss-light);
+}
+.pa-bin-chip .pa-bin-name {
+  flex: 1; font-family: 'Fraunces', serif; font-size: 0.95rem; letter-spacing: -0.01em;
+}
+.pa-bin-chip .pa-bin-count { color: rgba(245,239,227,0.6); font-size: 0.78rem; }
+
+.pa-actions {
+  display: flex; gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(245,239,227,0.12);
+}
+.pa-clear {
+  background: transparent;
+  color: rgba(245,239,227,0.7);
+  border: 1px solid rgba(245,239,227,0.2);
+  padding: 9px 14px;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pa-clear:hover { color: var(--cream); border-color: var(--cream); }
+.pa-actions .btn { flex: 1; justify-content: center; }
+
+/* =========================================================
+   CALCULATOR (refined)
+   ========================================================= */
+.calc {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 28px;
+  padding: 64px 56px;
+  margin: 0 auto;
+  max-width: 1100px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 880px) { .calc { padding: 44px 28px; border-radius: 20px; } }
+
+.calc::before {
+  content: "";
+  position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(143, 178, 130, 0.18), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.calc h2, .calc h3 { color: var(--cream); }
+.calc .eyebrow { color: var(--moss-light); }
+.calc-header { max-width: 600px; margin-bottom: 44px; }
+.calc-header h2 { margin: 16px 0 12px; }
+.calc-header p { color: rgba(245, 239, 227, 0.72); }
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 880px) { .calc-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.calc-fields { display: flex; flex-direction: column; gap: 28px; }
+
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--moss-light);
+  margin-bottom: 12px;
+}
+
+.choice-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--cream);
+  padding: 10px 16px;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.choice:hover { background: rgba(255,255,255,0.12); }
+.choice.active {
+  background: var(--cream); color: var(--ink);
+  border-color: var(--cream);
+}
+
+.slider-wrap { display: flex; flex-direction: column; gap: 10px; }
+.slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 2px; outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px; height: 22px;
+  background: var(--orange);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.slider::-moz-range-thumb {
+  width: 22px; height: 22px;
+  background: var(--orange);
+  border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.slider-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(245,239,227,0.55); }
+.slider-value { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.05rem; color: var(--cream); }
+
+.checkbox-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.check {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  cursor: pointer; font-size: 0.9rem;
+  transition: all 0.15s;
+}
+.check:hover { background: rgba(255,255,255,0.08); }
+.check input { display: none; }
+.check .box {
+  width: 16px; height: 16px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.check input:checked + .box { background: var(--orange); border-color: var(--orange); }
+.check input:checked + .box::after { content: "✓"; color: var(--cream); font-size: 12px; font-weight: 700; }
+
+.result {
+  background: rgba(245, 239, 227, 0.08);
+  border: 1px solid rgba(245, 239, 227, 0.14);
+  border-radius: 18px;
+  padding: 32px;
+  position: sticky; top: 100px;
+}
+.result-bins {
+  font-family: 'Fraunces', serif;
+  font-size: 4.5rem; line-height: 1;
+  color: var(--cream);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.result-bins-label { display: block; font-size: 0.85rem; color: rgba(245,239,227,0.6); margin-top: 6px; font-weight: 400; letter-spacing: 0.04em; }
+.result-pkg {
+  display: inline-block; margin-top: 14px;
+  padding: 6px 14px;
+  background: var(--orange); color: var(--cream);
+  border-radius: 100px;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.result-divider { height: 1px; background: rgba(245,239,227,0.14); margin: 24px 0; }
+.result-line { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; font-size: 0.95rem; }
+.result-line span:first-child { color: rgba(245,239,227,0.7); }
+.result-line.total {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(245,239,227,0.14);
+}
+.result-line.total span:first-child { color: var(--cream); font-family: 'Manrope', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.result-savings {
+  margin-top: 20px; padding: 14px 16px;
+  background: rgba(143, 178, 130, 0.12);
+  border: 1px solid rgba(143, 178, 130, 0.25);
+  border-radius: 10px;
+  font-size: 0.9rem; color: var(--moss-light);
+}
+.result .btn { width: 100%; justify-content: center; margin-top: 20px; }
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+.pricing-header { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+@media (max-width: 820px) { .pricing-header { grid-template-columns: 1fr; gap: 20px; } }
+.pricing-header h2 { margin: 16px 0 0; }
+.pricing-header p { font-size: 1.05rem; max-width: 460px; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1000px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+.tier {
+  background: var(--cream-warm);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-m);
+  padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.tier:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+.tier.featured { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.tier.featured::before {
+  content: "Most popular";
+  position: absolute; top: -10px; left: 28px;
+  background: var(--orange); color: var(--cream);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 100px;
+}
+.tier h3 { font-size: 1.5rem; }
+.tier .tier-bins { font-size: 0.88rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+.tier.featured .tier-bins { color: rgba(245,239,227,0.65); }
+.tier .tier-price { font-family: 'Fraunces', serif; font-size: 3rem; line-height: 1; font-weight: 500; letter-spacing: -0.03em; margin-top: 4px; }
+.tier .tier-price .dollar { font-size: 1.4rem; vertical-align: 18px; opacity: 0.7; }
+.tier .tier-price .per { font-size: 0.85rem; color: var(--ink-soft); font-weight: 400; font-family: 'Manrope', sans-serif; letter-spacing: 0.04em; }
+.tier.featured .per { color: rgba(245,239,227,0.6); }
+.tier ul { list-style: none; padding: 0; margin: 12px 0; font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
+.tier ul li::before { content: "✓"; color: var(--moss); margin-right: 8px; font-weight: 700; }
+.tier.featured ul li::before { color: var(--moss-light); }
+.tier .btn { margin-top: auto; }
+
+.addons { margin-top: 56px; background: var(--cream-warm); border: 1px solid var(--paper-line); border-radius: var(--radius-m); padding: 36px 36px; }
+.addons h3 { margin-bottom: 20px; font-size: 1.4rem; }
+.addons-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 32px; }
+.addon-item { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px dashed var(--paper-line); font-size: 0.95rem; }
+.addon-item .price { font-weight: 600; color: var(--moss); }
+
+/* =========================================================
+   CARE PACKAGE — moving day
+   ========================================================= */
+.care {
+  background: var(--moss-deep);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.care::before {
+  content: "";
+  position: absolute;
+  bottom: -200px; right: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(215, 82, 45, 0.18), transparent 70%);
+  pointer-events: none;
+}
+.care-header {
+  max-width: 720px;
+  margin-bottom: 64px;
+}
+.care-header .eyebrow { color: var(--orange-pale); }
+.care-header h2 { color: var(--cream); margin: 16px 0 16px; }
+.care-header h2 em { color: var(--orange-soft); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.care-header p { color: rgba(245,239,227,0.78); font-size: 1.1rem; }
+
+.care-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 0.95fr;
+  gap: 20px;
+  align-items: stretch;
+}
+@media (max-width: 1080px) { .care-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .care-grid { grid-template-columns: 1fr; } }
+
+.care-card {
+  background: rgba(245,239,227,0.05);
+  border: 1px solid rgba(245,239,227,0.12);
+  border-radius: 18px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.care-card:hover { background: rgba(245,239,227,0.08); border-color: rgba(245,239,227,0.2); }
+.care-card .care-tag {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--orange-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.care-card .care-tag::before { content: ""; width: 16px; height: 1px; background: var(--orange-soft); }
+.care-card h3 { color: var(--cream); font-size: 1.35rem; line-height: 1.15; margin-bottom: 4px; }
+.care-card p { color: rgba(245,239,227,0.75); font-size: 0.95rem; }
+
+/* playlist mini player */
+.playlist {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(245,239,227,0.12);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.track {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: padding 0.15s;
+}
+.track:hover { padding-left: 4px; }
+.track .track-art {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--orange), var(--moss-light));
+  position: relative;
+  overflow: hidden;
+}
+.track .track-art::after {
+  content: "▶"; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.85); font-size: 0.7rem;
+  opacity: 0; transition: opacity 0.2s;
+}
+.track:hover .track-art::after { opacity: 1; }
+.track .track-art.b { background: linear-gradient(135deg, var(--bin-blue), var(--moss)); }
+.track .track-art.c { background: linear-gradient(135deg, var(--moss), var(--orange-soft)); }
+.track .track-art.d { background: linear-gradient(135deg, var(--moss-deep), var(--bin-blue)); }
+.track-info { flex: 1; min-width: 0; }
+.track-info .t-name {
+  font-family: 'Fraunces', serif;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  display: block;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.track-info .t-artist {
+  font-size: 0.76rem;
+  color: rgba(245,239,227,0.55);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: block;
+}
+
+/* snack list */
+.snacks { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+.snack {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(245,239,227,0.14);
+}
+.snack:last-child { border-bottom: none; padding-bottom: 0; }
+.snack .snack-icon {
+  font-size: 1.4rem; line-height: 1; flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: rgba(245,239,227,0.06);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.snack-text { flex: 1; }
+.snack-text strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem; letter-spacing: -0.01em;
+  color: var(--cream);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.snack-text span {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(245,239,227,0.65);
+  line-height: 1.4;
+}
+
+/* Overwhelm-permission card */
+.permission-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 8px;
+}
+.permission {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 0.92rem;
+  color: rgba(245,239,227,0.85);
+  line-height: 1.5;
+}
+.permission .check-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--cream);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700;
+  margin-top: 2px;
+}
+.permission strong {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cream);
+  display: block;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+
+.care-footer {
+  margin-top: 56px;
+  padding: 28px 32px;
+  background: rgba(245,239,227,0.06);
+  border: 1px solid rgba(245,239,227,0.14);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.care-footer p {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+  max-width: 540px;
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq-header { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 40px; }
+@media (max-width: 820px) { .faq-header { grid-template-columns: 1fr; gap: 20px; } }
+.faq-header h2 { margin: 16px 0 0; }
+.faq-header p { max-width: 460px; }
+
+.faq-list { max-width: 920px; margin: 0 auto; }
+
+.faq-categories {
+  display: flex; gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.faq-cat {
+  background: transparent;
+  border: 1px solid var(--paper-line);
+  color: var(--ink-soft);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.faq-cat:hover { color: var(--ink); border-color: var(--ink); }
+.faq-cat.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+.faq-item {
+  border-bottom: 1px solid var(--paper-line);
+  padding: 24px 0;
+}
+.faq-item.hidden { display: none; }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Fraunces', serif;
+  font-size: 1.22rem;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  gap: 16px;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: "+"; font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.6rem;
+  color: var(--moss); transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.faq-item[open] .faq-q::after { content: "−"; }
+.faq-q .faq-cat-tag {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-pale);
+  padding: 3px 8px;
+  border-radius: 100px;
+  margin-right: 8px;
+  vertical-align: 2px;
+}
+.faq-a { padding-top: 14px; font-size: 0.97rem; color: var(--ink-soft); max-width: 740px; line-height: 1.6; }
+.faq-a strong { color: var(--ink); }
+
+/* =========================================================
+   BOOKING
+   ========================================================= */
+.book.section {
+  background: var(--moss-deep);
+  color: var(--cream);
+}
+.book-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 920px) { .book-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.book-info { padding-top: 12px; }
+.book-info .eyebrow { color: rgba(143,178,130,0.95); }
+.book-info h2 { color: var(--cream); margin: 16px 0 16px; }
+.book-info h2 em { color: var(--orange-soft); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.book-info .book-lead { color: rgba(245,239,227,0.78); font-size: 1.1rem; max-width: 420px; margin-bottom: 32px; }
+
+.confirm-badge {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 18px 22px;
+  background: rgba(245,239,227,0.05);
+  border: 1px solid rgba(245,239,227,0.16);
+  border-radius: 12px;
+  margin-bottom: 22px;
+  max-width: 420px;
+}
+.confirm-badge svg { color: var(--moss-light); flex-shrink: 0; margin-top: 1px; }
+.confirm-badge strong { display: block; color: var(--cream); font-family: 'Fraunces', serif; font-size: 1.08rem; font-weight: 500; margin-bottom: 2px; letter-spacing: -0.01em; }
+.confirm-badge span { color: rgba(245,239,227,0.7); font-size: 0.92rem; }
+
+.alt-contact { font-size: 0.92rem; color: rgba(245,239,227,0.6); margin-top: 24px; }
+.alt-contact-links { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.alt-contact a { color: var(--cream); text-decoration: underline; text-decoration-color: rgba(245,239,227,0.35); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
+.alt-contact a:hover { text-decoration-color: var(--cream); }
+.alt-contact .separator { color: rgba(245,239,227,0.3); }
+
+.book-form-wrap {
+  background: var(--cream); color: var(--ink);
+  padding: 38px;
+  border-radius: 18px;
+  box-shadow: 0 24px 56px rgba(0,0,0,0.22);
+}
+@media (max-width: 540px) { .book-form-wrap { padding: 28px 22px; } }
+.book-form { display: flex; flex-direction: column; gap: 18px; }
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label {
+  font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--moss);
+}
+.field label .optional { text-transform: none; letter-spacing: 0; color: var(--ink-soft); font-weight: 400; margin-left: 4px; }
+.field input, .field select, .field textarea {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.97rem; padding: 12px 14px;
+  background: var(--cream-warm); border: 1px solid var(--paper-line); border-radius: 8px;
+  color: var(--ink); outline: none;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  width: 100%;
+}
+.field input::placeholder, .field textarea::placeholder { color: rgba(26,26,24,0.4); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--moss); background: #FFFCF4; box-shadow: 0 0 0 3px rgba(63, 90, 58, 0.12);
+}
+.field textarea { resize: vertical; min-height: 88px; font-family: inherit; }
+.field select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%233F5A3A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+  padding-right: 40px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+.book-form button[type="submit"] { margin-top: 8px; align-self: flex-start; font-size: 1rem; padding: 14px 28px; }
+.book-form button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-disclaimer { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
+.form-error {
+  padding: 10px 14px;
+  background: rgba(215, 82, 45, 0.08);
+  border: 1px solid rgba(215, 82, 45, 0.3);
+  color: #A53D1B;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.book-success {
+  background: var(--cream); color: var(--ink);
+  padding: 56px 36px;
+  border-radius: 18px; text-align: center;
+  box-shadow: 0 24px 56px rgba(0,0,0,0.22);
+}
+.book-success svg { color: var(--moss); margin-bottom: 18px; }
+.book-success h3 { margin-bottom: 14px; font-size: 1.7rem; }
+.book-success p { color: var(--ink-soft); max-width: 420px; margin: 0 auto 10px; }
+.book-success .success-fallback { margin-top: 18px; font-size: 0.9rem; color: var(--ink-soft); }
+.book-success a { color: var(--moss); text-decoration: underline; text-underline-offset: 3px; }
+
+/* =========================================================
+   FOUNDER NOTE (handwritten letter feel)
+   ========================================================= */
+.founder {
+  padding: 100px 0;
+  background: var(--cream);
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 820px) { .founder-grid { grid-template-columns: 1fr; gap: 32px; } }
+.founder-portrait {
+  aspect-ratio: 4/5;
+  background: linear-gradient(160deg, var(--cream-warm) 0%, var(--moss-pale) 60%, var(--moss) 100%);
+  border-radius: 6px;
+  position: relative;
+  box-shadow: var(--shadow-photo);
+  transform: rotate(-1deg);
+  overflow: hidden;
+}
+.founder-portrait::after {
+  content: "Sam · Loop founder · M5V";
+  position: absolute;
+  bottom: 14px; left: 16px; right: 16px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--cream);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+.founder-letter h2 { margin-bottom: 22px; }
+.founder-letter h2 em { color: var(--moss); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.founder-letter p {
+  font-family: 'Fraunces', serif;
+  font-size: 1.18rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  text-wrap: pretty;
+  letter-spacing: -0.005em;
+}
+.founder-letter p strong { color: var(--ink); font-weight: 500; }
+.founder-sig {
+  margin-top: 28px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--moss);
+  letter-spacing: -0.01em;
+}
+.founder-sig::after {
+  content: ""; display: block;
+  width: 72px; height: 1px; background: var(--ink); margin-top: 10px;
+}
+.founder-meta {
+  margin-top: 4px;
+  font-size: 0.85rem; color: var(--ink-mute);
+  font-family: 'Manrope', sans-serif;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  background: var(--ink);
+  color: rgba(245,239,227,0.6);
+  padding: 64px 0 32px;
+  font-size: 0.88rem;
+}
+.footer-top {
+  padding-bottom: 48px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(245,239,227,0.12);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: end;
+}
+@media (max-width: 820px) { .footer-top { grid-template-columns: 1fr; gap: 32px; } }
+.footer-top h2 {
+  color: var(--cream);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.footer-top h2 em { color: var(--moss-light); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.footer-top .footer-cta { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.footer-top .footer-cta p { color: rgba(245,239,227,0.65); max-width: 360px; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+@media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-brand .logo { color: var(--cream); font-size: 1.8rem; }
+.footer-brand p { color: rgba(245,239,227,0.55); margin-top: 14px; max-width: 280px; }
+footer h5 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cream); margin-bottom: 16px;
+}
+footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+footer ul a { color: rgba(245,239,227,0.6); text-decoration: none; transition: color 0.2s; }
+footer ul a:hover { color: var(--cream); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(245,239,227,0.10);
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: rgba(245,239,227,0.5);
+}
+
+/* ---------- animations ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.7s ease-out backwards; }
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+
+/* utility */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 16px; }
+.mt-4 { margin-top: 32px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="top">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark"></span>
+      Loop
+    </a>
+    <div class="nav-meta">Reusable moving bins, delivered.</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#book" class="btn btn-orange btn-sm btn-arrow">Book bins</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-meta-row">
+      <span class="vol">Vol. 04 · Issue 02 — The Moving Day Co.</span>
+      <span class="city-time"><span class="dot"></span>Independently run since 2022 · Same-day in core areas</span>
+      <span><em class="editorial">"Skip the cardboard."</em></span>
+    </div>
+
+    <div class="hero-headline-row">
+      <div id="weather-strip" class="weather-strip fade-up"></div>
+      <span class="eyebrow fade-up delay-1">A field guide to a calmer move</span>
+    </div>
+
+    <h1 class="hero-display fade-up delay-2">
+      Skip the <span class="accent">cardboard.</span>
+      <span class="underline">Keep your weekend.</span>
+    </h1>
+
+    <!-- Editorial ticker / running mantra under the display headline -->
+    <div class="hero-ticker fade-up delay-3" aria-hidden="true">
+      <span>No tape</span><span class="tdot">●</span>
+      <span>No assembly</span><span class="tdot">●</span>
+      <span>No 9pm cardboard run</span><span class="tdot">●</span>
+      <span>No soggy lobby pile</span><span class="tdot">●</span>
+      <span>No surprises</span><span class="tdot">●</span>
+      <span>Just bins, delivered</span>
+    </div>
+
+    <div class="hero-body-grid">
+      <div class="hero-body-left fade-up delay-3">
+        <p class="hero-lead">
+          Loop drops off heavy-duty plastic bins at your door, you pack at your pace, we pick them up when you're done. No tape. No flattening boxes at midnight. No soggy cardboard pile in the lobby on Sunday morning. Just bins, delivered — and a moving day that ends with you on the couch instead of cleaning up after yourself.
+        </p>
+        <div class="hero-ctas">
+          <a href="#calculator" class="btn btn-primary btn-arrow btn-lg">How many bins do I need?</a>
+          <a href="#pricing" class="btn btn-ghost">See pricing</a>
+        </div>
+        <div class="hero-trust">
+          <span class="ribbon ribbon-orange">
+            <span class="ribbon-k">Same-day</span>
+            <span class="ribbon-v">48h average · downtown</span>
+          </span>
+          <span class="ribbon ribbon-moss">
+            <span class="ribbon-k">Free cancel</span>
+            <span class="ribbon-v">Up to 24h before drop-off</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO PULL QUOTE ============ -->
+<section class="intro-pullquote">
+  <div class="wrap-narrow pq-grid">
+    <div class="pq-side">
+      A note from us<strong>Why we even did this</strong>
+    </div>
+    <div>
+      <blockquote>
+        <span class="open">“</span>Moving is already the worst day of someone's month — sometimes their year. The least we can do is <em>make it boring.</em> No surprises, no broken boxes at 11pm, no pile of cardboard you'll regret on Sunday. Just bins, on time, picked up when you're done.<span class="open">”</span>
+      </blockquote>
+      <div class="attribution">— Sari, who started Loop after their fourth move in five years</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="why section">
+  <div class="wrap">
+    <div class="why-header">
+      <div>
+        <span class="eyebrow">Why bins, not boxes</span>
+        <h2>Cardboard is the <em class="editorial">weakest link</em> in your move.</h2>
+      </div>
+      <p class="why-intro">
+        It collapses under weight. It soaks up rain. It runs out at 9pm the night before. And then it lives in your hallway until trash day. We just did the math and decided: nobody should have to do this.
+      </p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="num">01</div>
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+        <h4>No tape, no assembly</h4>
+        <p>Snap-lock lids. Pre-cleaned. Walk in, pack, walk out — your evening doesn't disappear into folding flaps.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="num">02</div>
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c5-3 13-3 18 0"/><path d="M3 12c5-3 13-3 18 0"/><path d="M3 6c5-3 13-3 18 0"/></svg>
+        <h4>Waterproof and tough</h4>
+        <p>Set them on a wet sidewalk, leave them in the lobby in March. Heavy-duty plastic, ~40 lb load each, no flex.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="num">03</div>
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <h4>Identical and stackable</h4>
+        <p>Every bin is the same size. They tessellate in elevators, dollies, and trucks. No more Tetris with random Amazon boxes.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="num">04</div>
+        <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9c5 0 9 4 9 9"/><path d="M21 12a9 9 0 0 1-9 9c-5 0-9-4-9-9"/><path d="M16 8l-4 4-2-2"/></svg>
+        <h4>Reused, not recycled</h4>
+        <p>Each Loop bin runs 100+ moves before retirement. That's 100 fewer cardboard piles, 100 fewer Sunday recycling runs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how section" id="how">
+  <div class="wrap">
+    <span class="eyebrow">The whole thing, on one screen</span>
+    <h2>Four steps. <em class="editorial">No surprises.</em></h2>
+    <p class="lead">Booking to pickup. Most of our customers don't think about us between step 2 and step 4 — that's the point.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3F5A3A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/>
+          </svg>
+        </div>
+        <h4>Book online</h4>
+        <p class="step-desc">Use the calculator (or just play with the pack-along) to figure out how many bins. Submit the form with your dates.</p>
+        <p class="step-time">Takes about 2 minutes.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3F5A3A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 17V7a1 1 0 011-1h11v11M15 17h6v-5l-3-3h-3"/>
+            <circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>
+          </svg>
+        </div>
+        <h4>We deliver</h4>
+        <p class="step-desc">Bins show up clean, stacked, with reusable labels and a hand truck if you need one. We text 30 minutes before we arrive.</p>
+        <p class="step-time">Usually within 48 hours.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3F5A3A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="6" width="16" height="14" rx="1.5"/><path d="M4 10h16"/><rect x="9" y="3" width="6" height="3" rx="0.5" fill="#3F5A3A"/>
+          </svg>
+        </div>
+        <h4>Pack &amp; move</h4>
+        <p class="step-desc">Pack at your pace. Snap the lids closed. They stack perfectly in elevators and trucks. One week is standard — extend any time.</p>
+        <p class="step-time">Your call. Most folks: 4–6 days.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3F5A3A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 17V7a1 1 0 00-1-1H9v11M9 17H3v-5l3-3h3"/>
+            <circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
+          </svg>
+        </div>
+        <h4>We pick up</h4>
+        <p class="step-desc">Once you're unpacked, we come back and take everything away. No flattening, no recycling depot, no third-floor cardboard pile.</p>
+        <p class="step-time">Same window we arrived in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PACK ALONG ============ -->
+<section class="pack-along section">
+  <div class="wrap">
+    <div class="pa-header">
+      <div>
+        <span class="eyebrow">Visualize the pack</span>
+        <h2>Drag a room. Watch it fit.</h2>
+      </div>
+      <p class="pa-intro">A different way to estimate. Drop the rooms you actually have into the truck below — we'll tell you which pack you'd be in. Tap on mobile.</p>
+    </div>
+
+    <div class="pa-grid">
+      <div class="pa-rooms">
+        <h4>Rooms in your home</h4>
+        <p class="pa-help">Drag (or tap) each one across. Tap again to remove.</p>
+        <div class="pa-room-list" id="pa-room-list"></div>
+      </div>
+
+      <div class="pa-truck">
+        <h4>Your truckful</h4>
+        <p class="pa-help">Bins add up as you go.</p>
+
+        <div class="pa-counter">
+          <span class="pa-bins" id="pa-bins-num">0</span>
+          <span class="pa-suffix">bins</span>
+        </div>
+        <div class="pa-pkg" id="pa-pkg"><em>Drop a room into the truck to see your pack →</em></div>
+
+        <div class="pa-stack" id="pa-stack">
+          <div class="pa-stack-empty">Empty truck. Drag a room from the left to start filling it.</div>
+        </div>
+
+        <div class="pa-actions">
+          <button class="pa-clear" id="pa-clear" type="button">Reset</button>
+          <a href="#book" class="btn btn-orange btn-arrow" id="pa-book">Book this pack</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="section" id="calculator">
+  <div class="wrap">
+    <div class="calc">
+      <div class="calc-header">
+        <span class="eyebrow">Or — the fast calculator</span>
+        <h2>How many bins do <em class="italic" style="color: var(--moss-light);">you</em> need?</h2>
+        <p>Tell us about your place. We'll give you a bin count, the right package, and a transparent total. No quote forms, no waiting on email.</p>
+      </div>
+
+      <div class="calc-grid">
+        <div class="calc-fields">
+          <div>
+            <label class="field-label">Home size</label>
+            <div class="choice-row" id="home-choices">
+              <button type="button" class="choice" data-home="studio">Studio</button>
+              <button type="button" class="choice active" data-home="1br">1 Bedroom</button>
+              <button type="button" class="choice" data-home="2br">2 Bedroom</button>
+              <button type="button" class="choice" data-home="3br">3 Bedroom</button>
+              <button type="button" class="choice" data-home="4br">4+ Bedroom</button>
+            </div>
+          </div>
+          <div>
+            <label class="field-label">How much stuff do you have?</label>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="5" value="3" class="slider" id="scale-slider"/>
+              <div class="slider-labels"><span>Minimalist</span><span>Average</span><span>Maximalist</span></div>
+              <div class="slider-value" id="scale-text">Average — about what most people have</div>
+            </div>
+          </div>
+          <div>
+            <label class="field-label">What also describes you?</label>
+            <div class="checkbox-grid">
+              <label class="check"><input type="checkbox" class="lifestyle" value="books"/><span class="box"></span>I have a lot of books</label>
+              <label class="check"><input type="checkbox" class="lifestyle" value="kitchen"/><span class="box"></span>I cook a lot (kitchen-heavy)</label>
+              <label class="check"><input type="checkbox" class="lifestyle" value="clothes"/><span class="box"></span>Big wardrobe / closet</label>
+              <label class="check"><input type="checkbox" class="lifestyle" value="hobbies"/><span class="box"></span>Hobbies with gear</label>
+              <label class="check"><input type="checkbox" class="lifestyle" value="kids"/><span class="box"></span>Moving with kids</label>
+              <label class="check"><input type="checkbox" class="lifestyle" value="pets"/><span class="box"></span>Have pets</label>
+            </div>
+          </div>
+          <div>
+            <label class="field-label">How long do you need them?</label>
+            <div class="choice-row" id="weeks-choices">
+              <button type="button" class="choice active" data-weeks="1">1 week</button>
+              <button type="button" class="choice" data-weeks="2">2 weeks</button>
+              <button type="button" class="choice" data-weeks="3">3 weeks</button>
+              <button type="button" class="choice" data-weeks="4">1 month</button>
+            </div>
+          </div>
+          <div>
+            <label class="field-label">Delivery zone</label>
+            <div class="choice-row" id="zone-choices">
+              <button type="button" class="choice active" data-zone="downtown">Downtown core</button>
+              <button type="button" class="choice" data-zone="toronto">Greater metro</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="result-bins">
+            <span id="r-bins">30</span>
+            <span class="result-bins-label">bins included</span>
+          </div>
+          <div class="result-pkg" id="r-pkg">One-Bedroom Pack</div>
+          <div class="result-divider"></div>
+          <div class="result-line"><span>Bin rental</span><span id="r-rental">$119.00</span></div>
+          <div class="result-line"><span>Delivery + pickup</span><span id="r-delivery">$30.00</span></div>
+          <div class="result-line"><span>Damage hold (refundable)</span><span>$50.00</span></div>
+          <div class="result-line total"><span>Estimate</span><span id="r-total">$199</span></div>
+          <div class="result-savings" id="r-savings">≈ <strong id="r-saved">$15</strong> less than buying cardboard, plus zero recycling.</div>
+          <a href="#book" class="btn btn-orange btn-arrow" id="r-book">Book this estimate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="pricing-header">
+      <div>
+        <span class="eyebrow">Pricing</span>
+        <h2>Pick a pack, or build <em class="editorial">your own.</em></h2>
+      </div>
+      <p>All packages cover one week. Need more time? Extend any pack by the week with no penalty. Volume discount is baked in: more bins, less per bin.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="tier">
+        <h3>Studio</h3>
+        <span class="tier-bins">15 bins · 1 week</span>
+        <div class="tier-price"><span class="dollar">$</span>99 <span class="per">/ pack</span></div>
+        <ul><li>Studio or bachelor</li><li>Reusable label set</li><li>Premium small-job convenience</li></ul>
+        <a href="#book" class="btn btn-ghost btn-arrow">Book Studio</a>
+      </div>
+      <div class="tier featured">
+        <h3>One-Bedroom</h3>
+        <span class="tier-bins">30 bins · 1 week</span>
+        <div class="tier-price"><span class="dollar">$</span>119 <span class="per">/ pack</span></div>
+        <ul><li>1BR condo or apartment</li><li>Reusable label set</li><li>Best value per bin</li></ul>
+        <a href="#book" class="btn btn-orange btn-arrow">Book One-Bedroom</a>
+      </div>
+      <div class="tier">
+        <h3>Two-Bedroom</h3>
+        <span class="tier-bins">50 bins · 1 week</span>
+        <div class="tier-price"><span class="dollar">$</span>185 <span class="per">/ pack</span></div>
+        <ul><li>2BR condo or small house</li><li>Free hand truck included</li><li>20 extra bins vs 1BR pack</li></ul>
+        <a href="#book" class="btn btn-ghost btn-arrow">Book Two-Bedroom</a>
+      </div>
+      <div class="tier">
+        <h3>Family</h3>
+        <span class="tier-bins">75 bins · 1 week</span>
+        <div class="tier-price"><span class="dollar">$</span>259 <span class="per">/ pack</span></div>
+        <ul><li>3BR house or larger</li><li>Free hand truck included</li><li>Lowest per-bin rate we offer</li></ul>
+        <a href="#book" class="btn btn-ghost btn-arrow">Book Family</a>
+      </div>
+    </div>
+
+    <div class="addons">
+      <h3>Add-ons &amp; the fine print</h3>
+      <div class="addons-list">
+        <div class="addon-item"><span>Delivery + pickup, downtown core</span><span class="price">$30</span></div>
+        <div class="addon-item"><span>Delivery + pickup, broader metro</span><span class="price">$48</span></div>
+        <div class="addon-item"><span>Extra week extension</span><span class="price">$1.45 / bin</span></div>
+        <div class="addon-item"><span>Hand truck rental (per day)</span><span class="price">$18</span></div>
+        <div class="addon-item"><span>Refundable damage hold</span><span class="price">$50</span></div>
+        <div class="addon-item"><span>Lost or damaged bin</span><span class="price">$40 each</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARE PACKAGE ============ -->
+<section class="care section">
+  <div class="wrap">
+    <div class="care-header">
+      <span class="eyebrow">A care package, on the house</span>
+      <h2>Moving day, <em>survived</em>.</h2>
+      <p>Three things we hand out, free, with every booking — because the bins are easy. The day itself is the hard part.</p>
+    </div>
+
+    <div class="care-grid">
+      <!-- Playlist -->
+      <div class="care-card">
+        <span class="care-tag">Soundtrack No. 1</span>
+        <h3>The 'just keep packing' playlist</h3>
+        <p>4 hours of mid-tempo, no-ballad, will-not-make-you-cry-over-an-old-photo songs. Tested in real walk-ups.</p>
+        <div class="playlist">
+          <div class="track">
+            <div class="track-art"></div>
+            <div class="track-info">
+              <span class="t-name">Steady Hands</span>
+              <span class="t-artist">For when the kitchen seems endless</span>
+            </div>
+          </div>
+          <div class="track">
+            <div class="track-art b"></div>
+            <div class="track-info">
+              <span class="t-name">Slow morning, fast tape gun</span>
+              <span class="t-artist">Mid-tempo only — no ballads</span>
+            </div>
+          </div>
+          <div class="track">
+            <div class="track-art c"></div>
+            <div class="track-info">
+              <span class="t-name">Slow Mover</span>
+              <span class="t-artist">For 2pm, when the energy dips</span>
+            </div>
+          </div>
+          <div class="track">
+            <div class="track-art d"></div>
+            <div class="track-info">
+              <span class="t-name">One More Bin</span>
+              <span class="t-artist">The closing-up, almost-done set</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snacks -->
+      <div class="care-card">
+        <span class="care-tag">Field rations</span>
+        <h3>Snacks that won't betray you</h3>
+        <p>What movers actually want to eat at hour four. Skip the sad pizza — your back will thank you.</p>
+        <div class="snacks">
+          <div class="snack">
+            <div class="snack-icon">🥖</div>
+            <div class="snack-text">
+              <strong>Bagel from your old block</strong>
+              <span>Last visit. Order it before you start packing.</span>
+            </div>
+          </div>
+          <div class="snack">
+            <div class="snack-icon">🍌</div>
+            <div class="snack-text">
+              <strong>Bananas + a litre of water</strong>
+              <span>You will sweat more than you think. Hydrate at hour 1.</span>
+            </div>
+          </div>
+          <div class="snack">
+            <div class="snack-icon">🥪</div>
+            <div class="snack-text">
+              <strong>One real meal, packed the night before</strong>
+              <span>Don't trust 5pm-you to make a decision. Past-you knows better.</span>
+            </div>
+          </div>
+          <div class="snack">
+            <div class="snack-icon">☕</div>
+            <div class="snack-text">
+              <strong>Coffee from the new block</strong>
+              <span>Step out, find the closest spot, claim the neighborhood.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- When you're overwhelmed -->
+      <div class="care-card">
+        <span class="care-tag">Permission slip</span>
+        <h3>If it all feels like too much.</h3>
+        <p>Moving cracks people open. Here's what we tell our friends. Take it as gentle, true advice.</p>
+        <div class="permission-list">
+          <div class="permission">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Stop. Sit down. Drink the water.</strong>
+              The pile will be there in five minutes. So will you.
+            </div>
+          </div>
+          <div class="permission">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Pack one bin, not the whole room.</strong>
+              One full bin is real progress. Stack it. Repeat.
+            </div>
+          </div>
+          <div class="permission">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Call someone. Anyone.</strong>
+              Even ten minutes on speakerphone helps. Boring is fine.
+            </div>
+          </div>
+          <div class="permission">
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Text us.</strong>
+              We've seen it all. We can extend your week, swap bins, give you the elevator-booking script. No charge for being human.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="care-footer">
+      <p>The care package is free with every booking. So is the playlist link, the elevator-booking template, and a printable moving-day checklist taped inside your first bin.</p>
+      <a href="#book" class="btn btn-orange btn-arrow">Get the bins (and the rest)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="wrap-narrow">
+    <div class="faq-header">
+      <div>
+        <span class="eyebrow">Real worries, real answers</span>
+        <h2>The stuff <em class="editorial">people actually ask.</em></h2>
+      </div>
+      <p>Filter by what you're worried about — kids, pets, walk-ups, weather, money, building rules. We've heard it.</p>
+    </div>
+
+    <div class="faq-categories">
+      <button class="faq-cat active" data-cat="all" type="button">All</button>
+      <button class="faq-cat" data-cat="logistics" type="button">Logistics</button>
+      <button class="faq-cat" data-cat="building" type="button">Buildings &amp; access</button>
+      <button class="faq-cat" data-cat="weather" type="button">Weather &amp; mess</button>
+      <button class="faq-cat" data-cat="people" type="button">Kids, pets &amp; people</button>
+      <button class="faq-cat" data-cat="money" type="button">Money</button>
+    </div>
+
+    <div class="faq-list">
+
+      <details class="faq-item" data-cat="building">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Building</span>I live in a walk-up, third floor. Is that a problem?</span></summary>
+        <div class="faq-a">Honestly, the opposite — bins are a walk-up's best friend. They have proper handles, snap-lock lids that don't pop open mid-stair, and they don't bottom-out under a heavy load. We bring a hand truck if you're hauling them up yourself. Tell us in the booking notes, we'll plan accordingly.</div>
+      </details>
+
+      <details class="faq-item" data-cat="building">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Building</span>My condo requires a Certificate of Insurance and elevator booking. Can you handle that?</span></summary>
+        <div class="faq-a">Yes. We have a standard COI we can email to your building manager the same morning, and we coordinate with concierge for service-elevator times. Most condo boards have seen our paperwork before — including the heritage buildings around College & Spadina, the Yorkville towers, and most of King West. Put your address in the booking and we'll handle the rest.</div>
+      </details>
+
+      <details class="faq-item" data-cat="people">
+        <summary class="faq-q"><span><span class="faq-cat-tag">People</span>I'm moving with kids. What helps?</span></summary>
+        <div class="faq-a">A few things. <strong>One:</strong> let kids decorate two or three bins as theirs — sticker, marker, whatever — so they have agency over the chaos. <strong>Two:</strong> we can leave a few bins early so the slow stuff (toys, books) can move at kid-pace. <strong>Three:</strong> the snap lids genuinely matter when you're at the new place at 9pm and a sleepy kid needs their stuffed animal — you'll find it.</div>
+      </details>
+
+      <details class="faq-item" data-cat="people">
+        <summary class="faq-q"><span><span class="faq-cat-tag">People</span>I have a cat / dog / nervous animal. Anything to know?</span></summary>
+        <div class="faq-a">Pets get rattled by movers and open doors. Two practical things: lids snap closed even with a curious paw on top (so a bin makes a fine temporary safe-space when filled with their bedding), and we always knock-and-wait rather than walking in. Tell us if you'd like us to leave the bins in the lobby instead of at your door.</div>
+      </details>
+
+      <details class="faq-item" data-cat="weather">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Weather</span>It's pouring rain on my move day. Now what?</span></summary>
+        <div class="faq-a">Bins are a rainy-day upgrade. They don't soak through, lids stay sealed, and you can stack them dripping in your foyer without worrying about the floor. We bring extra grip pads in winter so they don't slide on icy lobby tile. The only thing rain can ruin is your mood — and the iced coffee waiting at the new place helps.</div>
+      </details>
+
+      <details class="faq-item" data-cat="weather">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Weather</span>How clean are the bins between rentals?</span></summary>
+        <div class="faq-a">Wiped down with a vinegar-and-water solution. Lids and handles sanitized. Inspected for cracks and missing snap-locks. If a bin is anything less than ready-to-pack, it doesn't go to a customer. (We also invite you to text us a photo if anything seems off when they arrive — we'll swap it that day.)</div>
+      </details>
+
+      <details class="faq-item" data-cat="logistics">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Logistics</span>What if I need to keep the bins longer than expected?</span></summary>
+        <div class="faq-a">Just message us. Extensions are <strong>$1.45/bin per additional week</strong>, charged at pickup. There's no penalty, no awkward reschedule fee. The first time we did rentals we forgot to charge anyone for extensions for two whole months — old habits.</div>
+      </details>
+
+      <details class="faq-item" data-cat="logistics">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Logistics</span>One address for delivery, a different one for pickup — possible?</span></summary>
+        <div class="faq-a">That's literally the whole point. Tell us both on the booking. We charge one delivery fee since it's one trip on our end. Most movers we serve are doing exactly this.</div>
+      </details>
+
+      <details class="faq-item" data-cat="money">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Money</span>What happens if a bin gets damaged or lost?</span></summary>
+        <div class="faq-a">Each rental includes a refundable <strong>$50 damage hold</strong>. If a bin is genuinely lost or unusable when we get it back, we deduct $40 per bin from the hold. Normal wear-and-tear is on us. We've never charged anyone the full $50 — and we've moved a lot of people.</div>
+      </details>
+
+      <details class="faq-item" data-cat="money">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Money</span>Is this actually cheaper than cardboard?</span></summary>
+        <div class="faq-a">For most 1BR moves, yes — by ten or twenty dollars. For studios, it's roughly even. The bigger savings: no time spent buying boxes, taping them, flattening them after, or driving them to a recycling depot. If you bill your time at anything more than minimum wage, it's not close.</div>
+      </details>
+
+      <details class="faq-item" data-cat="logistics">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Logistics</span>Same-day or next-day deliveries?</span></summary>
+        <div class="faq-a">In the downtown core (M5/M4), next-day is usually fine and same-day is sometimes possible. Outside the core, we ask for 48 hours notice. The earlier you book, the better window we can offer.</div>
+      </details>
+
+      <details class="faq-item" data-cat="weather">
+        <summary class="faq-q"><span><span class="faq-cat-tag">Weather</span>Do I need to clean the bins before returning?</span></summary>
+        <div class="faq-a">Just empty them. We sanitize everything ourselves. If a bin comes back with food spills or anything sticky, that's still fine — but please, no soggy sandwiches.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER NOTE ============ -->
+<section class="founder">
+  <div class="wrap-narrow">
+    <div class="founder-grid">
+      <div class="founder-portrait"></div>
+      <div class="founder-letter">
+        <span class="eyebrow">A note from the founder</span>
+        <h2>I started Loop because moving <em>broke me.</em></h2>
+        <p>Four moves in five years — four different apartments, four bad weekends, four dumpsters worth of cardboard at the curb. By the third move I had this thought: I'm <strong>spending real money to make my life worse.</strong> Buy boxes. Build boxes. Fill boxes. Move boxes. Break down boxes. Drag them to the curb. Why is this still how we do it?</p>
+        <p>So we built Loop. The bins are the easy part. The hard part is being the kind of business you'd actually recommend to a friend at 10pm the night before their move — when they text you, panicked, that the boxes never came. We answer that text. We always have.</p>
+        <p>If anything about a Loop move is less than great, my number is on the booking confirmation. Text it. I'll fix it. That's the whole pitch.</p>
+        <div class="founder-sig">— Sari</div>
+        <div class="founder-meta">Founder · Loop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKING FORM ============ -->
+<section class="book section" id="book">
+  <div class="wrap">
+    <div class="book-grid">
+      <!-- left: messaging -->
+      <div class="book-info">
+        <span class="eyebrow">Book bins</span>
+        <h2>Ready when you are.</h2>
+        <p class="book-lead">Tell us about your move below. Every request gets a personal reply.</p>
+
+        <div class="confirm-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12l5 5L20 7"/>
+          </svg>
+          <div>
+            <strong>Confirmed within 48 hours</strong>
+            <span>by email or text — usually much faster.</span>
+          </div>
+        </div>
+
+        <div class="alt-contact">
+          <span>Prefer to reach out directly?</span>
+          <div class="alt-contact-links">
+            <a href="sms:+14379910603">Text (437) 991-0603</a>
+            <span class="separator">·</span>
+            <a href="mailto:info@inscendai.com">info@inscendai.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- right: form -->
+      <div class="book-form-wrap">
+        <form id="bookingForm" class="book-form" novalidate>
+          <div class="field">
+            <label for="bf-name">Your name</label>
+            <input type="text" id="bf-name" name="name" required autocomplete="name" />
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="bf-email">Email</label>
+              <input type="email" id="bf-email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="bf-phone">Phone</label>
+              <input type="tel" id="bf-phone" name="phone" required autocomplete="tel" placeholder="(416) 555-0123" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="bf-date">Move date</label>
+              <input type="date" id="bf-date" name="date" required />
+            </div>
+            <div class="field">
+              <label for="bf-package">Package</label>
+              <select id="bf-package" name="package" required>
+                <option value="">Choose a package</option>
+                <option value="Studio Pack — 15 bins ($99)">Studio Pack — 15 bins ($99)</option>
+                <option value="One-Bedroom Pack — 30 bins ($119)">One-Bedroom Pack — 30 bins ($119)</option>
+                <option value="Two-Bedroom Pack — 50 bins ($185)">Two-Bedroom Pack — 50 bins ($185)</option>
+                <option value="Family Pack — 75 bins ($259)">Family Pack — 75 bins ($259)</option>
+                <option value="Custom (76+ bins)">Custom order (76+ bins)</option>
+                <option value="Not sure yet">Not sure — please advise</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="bf-pickup">Pickup address (or postal code)</label>
+            <input type="text" id="bf-pickup" name="pickup_address" required placeholder="e.g. 123 Yonge St or M5B 1A1" autocomplete="street-address" />
+          </div>
+
+          <div class="field">
+            <label for="bf-dropoff">Drop-off address <span class="optional">(if different)</span></label>
+            <input type="text" id="bf-dropoff" name="dropoff_address" placeholder="Same as pickup if left blank" />
+          </div>
+
+          <div class="field">
+            <label for="bf-notes">Anything else we should know? <span class="optional">(optional)</span></label>
+            <textarea id="bf-notes" name="notes" rows="3" placeholder="Walk-up vs elevator, preferred delivery time, etc."></textarea>
+          </div>
+
+          <div class="form-error" id="bf-error" hidden></div>
+
+          <button type="submit" class="btn btn-orange btn-arrow">Send booking request</button>
+          <p class="form-disclaimer">No charge yet — we'll follow up to confirm details and send a payment link.</p>
+        </form>
+
+        <div id="bookingSuccess" class="book-success" hidden>
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <circle cx="28" cy="28" r="26" stroke="currentColor" stroke-width="2"/>
+            <path d="M17 28l8 8 14-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Got it — your request is in.</h3>
+          <p>We'll review and reply with a confirmation, payment link, and delivery window <strong>within 48 hours</strong>.</p>
+          <p class="success-fallback">If you don't hear from us, text <a href="sms:+14379910603">(437) 991-0603</a> and we'll sort it out.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <h2>Built for the<br><em>worst day of your month.</em></h2>
+      <div class="footer-cta">
+        <p>Book your bins, save your evening, and meet a real person on the other end of the text thread.</p>
+        <a href="#book" class="btn btn-ghost-cream btn-arrow">Start a booking</a>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#top"><span class="logo-mark"></span>Loop</a>
+        <p>Reusable moving bin rental. Built for condos, walk-ups, students, anxious cats, and anyone tired of cardboard.</p>
+      </div>
+      <div>
+        <h5>Service</h5>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#calculator">Calculator</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#book">Book bins</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Care package</h5>
+        <ul>
+          <li><a href="#faq">Real-anxiety FAQ</a></li>
+          <li><a href="#calculator">Bin calculator</a></li>
+          <li><a href="#book">Booking form</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Reach us</h5>
+        <ul>
+          <li><a href="sms:+14379910603">Text (437) 991-0603</a></li>
+          <li><a href="mailto:info@inscendai.com">info@inscendai.com</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Loop Co. 2026 — Independent. Local. Reusable.</span>
+      <span>The reusable moving company you'd recommend to a friend.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   LOOP — interactive bits
+   ========================================================== */
+
+/* -------------------- WEATHER STRIP -------------------- */
+(function setWeather(){
+  const el = document.getElementById('weather-strip');
+  if (!el) return;
+  // Toronto-feeling auto-message based on local time/season
+  const now = new Date();
+  const month = now.getMonth(); // 0-11
+  const hour = now.getHours();
+  let msg, icon, temp;
+  if (month >= 11 || month <= 1) { // Dec-Feb
+    icon = "❄"; temp = "-4°"; msg = "Lake-effect snow possible. We'll bring extra grip pads.";
+  } else if (month <= 3) { // Mar-Apr
+    icon = "☂"; temp = "7°"; msg = "Slush season. Bins are waterproof — your floors stay clean.";
+  } else if (month <= 7) { // May-Aug
+    icon = "☀"; temp = "22°"; msg = "Patio weather. We bring the bins, you bring the iced coffee.";
+  } else if (month <= 9) { // Sep-Oct
+    icon = "🍁"; temp = "14°"; msg = "Peak moving season — book elevators early.";
+  } else { // Nov
+    icon = "☁"; temp = "5°"; msg = "Grey-and-grateful weather. Layer up, we'll handle the heavy stuff.";
+  }
+  if (hour < 6 || hour > 21) msg = msg + " (We reply tomorrow morning.)";
+  el.innerHTML = `<span class="ws-icon">${icon}</span><span><strong>${temp}</strong> today — ${msg}</span>`;
+})();
+
+
+/* -------------------- PACK ALONG -------------------- */
+const ROOMS = [
+  { id: 'kitchen-light', name: 'Kitchen — basics', bins: 4 },
+  { id: 'kitchen-heavy', name: 'Kitchen — full cook', bins: 7 },
+  { id: 'bedroom-master', name: 'Main bedroom', bins: 6 },
+  { id: 'bedroom-second', name: 'Second bedroom', bins: 4 },
+  { id: 'living', name: 'Living room', bins: 5 },
+  { id: 'bathroom', name: 'Bathroom', bins: 2 },
+  { id: 'closet', name: 'Closet & wardrobe', bins: 5 },
+  { id: 'books', name: 'Bookshelf (a real one)', bins: 4 },
+  { id: 'office', name: 'Home office', bins: 4 },
+  { id: 'kids', name: 'Kid\'s room', bins: 5 },
+  { id: 'storage', name: 'Storage / hobbies', bins: 3 },
+  { id: 'fragile', name: 'Fragile / art', bins: 2 }
+];
+
+(function setupPackAlong(){
+  const list = document.getElementById('pa-room-list');
+  const stack = document.getElementById('pa-stack');
+  const counter = document.getElementById('pa-bins-num');
+  const pkgEl = document.getElementById('pa-pkg');
+  const clear = document.getElementById('pa-clear');
+  if (!list || !stack || !counter) return;
+
+  // Render rooms
+  ROOMS.forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'pa-room';
+    el.draggable = true;
+    el.dataset.room = r.id;
+    el.innerHTML = `
+      <div class="pa-room-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div>
+        <span class="pa-room-name">${r.name}</span>
+        <span class="pa-room-bins">≈ ${r.bins} bins</span>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+
+  let added = []; // list of room ids added
+
+  function getPackage(bins) {
+    if (bins <= 15) return { name: 'Studio Pack', size: 15, price: 99 };
+    if (bins <= 30) return { name: 'One-Bedroom Pack', size: 30, price: 119 };
+    if (bins <= 50) return { name: 'Two-Bedroom Pack', size: 50, price: 185 };
+    if (bins <= 75) return { name: 'Family Pack', size: 75, price: 259 };
+    return { name: 'Custom Order', size: bins, price: Math.round(bins * 3.45) };
+  }
+
+  function render() {
+    const total = added.reduce((s, id) => s + (ROOMS.find(r => r.id === id)?.bins || 0), 0);
+    counter.textContent = total;
+    counter.classList.toggle('filled', total > 0);
+
+    if (total > 0) {
+      const pkg = getPackage(total);
+      pkgEl.innerHTML = `Fits in our <strong>${pkg.name}</strong> · ${pkg.size} bins · $${pkg.price}/week`;
+    } else {
+      pkgEl.innerHTML = '<em>Drop a room into the truck to see your pack →</em>';
+    }
+
+    // visual stack
+    const empty = stack.querySelector('.pa-stack-empty');
+    [...stack.querySelectorAll('.pa-bin-chip')].forEach(c => c.remove());
+    stack.classList.toggle('has-bins', added.length > 0);
+
+    added.forEach(id => {
+      const r = ROOMS.find(x => x.id === id);
+      if (!r) return;
+      const chip = document.createElement('div');
+      chip.className = 'pa-bin-chip';
+      chip.innerHTML = `
+        <div class="pa-bin-icon"></div>
+        <div class="pa-bin-name">${r.name}</div>
+        <div class="pa-bin-count">${r.bins} bins</div>
+      `;
+      stack.appendChild(chip);
+    });
+
+    document.querySelectorAll('.pa-room').forEach(el => {
+      el.classList.toggle('added', added.includes(el.dataset.room));
+    });
+  }
+
+  function addRoom(id) {
+    if (!id) return;
+    if (added.includes(id)) {
+      // toggle off
+      added = added.filter(x => x !== id);
+    } else {
+      added.push(id);
+    }
+    render();
+  }
+
+  // Drag & drop
+  list.addEventListener('dragstart', e => {
+    const r = e.target.closest('.pa-room');
+    if (!r) return;
+    r.classList.add('dragging');
+    e.dataTransfer.setData('text/plain', r.dataset.room);
+    e.dataTransfer.effectAllowed = 'copy';
+  });
+  list.addEventListener('dragend', e => {
+    e.target.closest('.pa-room')?.classList.remove('dragging');
+  });
+  // Click also adds (mobile-friendly)
+  list.addEventListener('click', e => {
+    const r = e.target.closest('.pa-room');
+    if (r) addRoom(r.dataset.room);
+  });
+
+  stack.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    stack.classList.add('over');
+  });
+  stack.addEventListener('dragleave', () => stack.classList.remove('over'));
+  stack.addEventListener('drop', e => {
+    e.preventDefault();
+    stack.classList.remove('over');
+    const id = e.dataTransfer.getData('text/plain');
+    if (id && !added.includes(id)) {
+      added.push(id);
+      render();
+    }
+  });
+
+  clear?.addEventListener('click', () => { added = []; render(); });
+
+  // Book this pack
+  document.getElementById('pa-book')?.addEventListener('click', e => {
+    const total = added.reduce((s, id) => s + (ROOMS.find(r => r.id === id)?.bins || 0), 0);
+    if (total > 0) {
+      const pkg = getPackage(total);
+      const select = document.getElementById('bf-package');
+      if (select) {
+        for (const opt of select.options) {
+          if (opt.value.startsWith(pkg.name)) { select.value = opt.value; break; }
+        }
+      }
+    }
+  });
+
+  render();
+})();
+
+/* -------------------- CALCULATOR -------------------- */
+const baseBins = { studio: 12, '1br': 24, '2br': 40, '3br': 58, '4br': 78 };
+const stuffMultiplier = { 1: 0.7, 2: 0.85, 3: 1.0, 4: 1.15, 5: 1.35 };
+const lifestyleAdders = { books: 4, kitchen: 4, clothes: 5, hobbies: 3, kids: 5, pets: 1 };
+const stuffLabels = {
+  1: "Light packer — just the essentials",
+  2: "Below average — pretty curated",
+  3: "Average — about what most people have",
+  4: "More than most — full closets, full shelves",
+  5: "Maximalist — every drawer is a story"
+};
+
+const calcState = { home: '1br', scale: 3, lifestyle: [], weeks: 1, zone: 'downtown' };
+
+(function setupCalc(){
+  const homeChoices = document.querySelectorAll('#home-choices .choice');
+  const weekChoices = document.querySelectorAll('#weeks-choices .choice');
+  const zoneChoices = document.querySelectorAll('#zone-choices .choice');
+  const slider = document.getElementById('scale-slider');
+  const scaleText = document.getElementById('scale-text');
+  if (!slider) return;
+
+  function bind(choices, key, parseInt_) {
+    choices.forEach(c => {
+      c.addEventListener('click', () => {
+        choices.forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        const v = c.dataset[key === 'home' ? 'home' : key === 'weeks' ? 'weeks' : 'zone'];
+        calcState[key] = parseInt_ ? parseInt(v, 10) : v;
+        recalc();
+      });
+    });
+  }
+  bind(homeChoices, 'home', false);
+  bind(weekChoices, 'weeks', true);
+  bind(zoneChoices, 'zone', false);
+
+  slider.addEventListener('input', () => {
+    calcState.scale = parseInt(slider.value, 10);
+    scaleText.textContent = stuffLabels[calcState.scale];
+    recalc();
+  });
+
+  document.querySelectorAll('.lifestyle').forEach(cb => {
+    cb.addEventListener('change', () => {
+      calcState.lifestyle = [...document.querySelectorAll('.lifestyle:checked')].map(c => c.value);
+      recalc();
+    });
+  });
+
+  function getPackageInfo(bins) {
+    if (bins <= 15) return { name: 'Studio Pack', size: 15, weekPrice: 99 };
+    if (bins <= 30) return { name: 'One-Bedroom Pack', size: 30, weekPrice: 119 };
+    if (bins <= 50) return { name: 'Two-Bedroom Pack', size: 50, weekPrice: 185 };
+    if (bins <= 75) return { name: 'Family Pack', size: 75, weekPrice: 259 };
+    return { name: 'Custom Order', size: bins, weekPrice: bins * 3.45 };
+  }
+
+  function recalc() {
+    const adders = calcState.lifestyle.reduce((s, k) => s + lifestyleAdders[k], 0);
+    const raw = baseBins[calcState.home] * stuffMultiplier[calcState.scale] + adders;
+    let bins = Math.ceil(raw / 5) * 5;
+    if (bins < 10) bins = 10;
+    const pkg = getPackageInfo(bins);
+    const extraWeeks = Math.max(0, calcState.weeks - 1);
+    const extension = extraWeeks * pkg.size * 1.45;
+    const rental = pkg.weekPrice + extension;
+    const delivery = calcState.zone === 'downtown' ? 30 : 48;
+    const total = rental + delivery;
+
+    const cardboardBoxes = Math.ceil(pkg.size * 45 / 50);
+    const cardboardCost = cardboardBoxes * 3.5;
+    const saved = Math.max(0, cardboardCost - total);
+
+    document.getElementById('r-bins').textContent = pkg.size;
+    document.getElementById('r-pkg').textContent = pkg.name;
+    document.getElementById('r-rental').textContent = '$' + rental.toFixed(2);
+    document.getElementById('r-delivery').textContent = '$' + delivery.toFixed(2);
+    document.getElementById('r-total').textContent = '$' + Math.round(total);
+
+    const savedEl = document.getElementById('r-savings');
+    if (saved > 5) {
+      document.getElementById('r-saved').textContent = '$' + Math.round(saved);
+      savedEl.style.display = 'block';
+    } else {
+      savedEl.innerHTML = "Reusable. No flattened cardboard pile, no recycling depot run on a Sunday.";
+      savedEl.style.display = 'block';
+    }
+
+    const bookBtn = document.getElementById('r-book');
+    if (bookBtn) {
+      bookBtn.dataset.prefillPkg = pkg.name;
+      bookBtn.dataset.prefillSize = pkg.size;
+      bookBtn.dataset.prefillPrice = Math.round(pkg.weekPrice);
+    }
+  }
+  recalc();
+})();
+
+/* -------------------- FAQ FILTER -------------------- */
+(function setupFAQ(){
+  const cats = document.querySelectorAll('.faq-cat');
+  const items = document.querySelectorAll('.faq-item');
+  cats.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cats.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      items.forEach(item => {
+        item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat);
+      });
+    });
+  });
+})();
+
+/* -------------------- FADE-UP ON SCROLL -------------------- */
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('fade-up');
+      fadeObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.tier, .why-card, .step, .faq-item, .care-card').forEach(el => fadeObserver.observe(el));
+
+/* -------------------- BOOKING FORM -------------------- */
+// ============ BOOKING FORM ============
+//
+// To enable real form submissions to your inbox (no email client opens):
+// 1. Sign up free at https://formspree.io (50 submissions/month free)
+// 2. Create a form, copy the endpoint URL (e.g. https://formspree.io/f/xabcdefg)
+// 3. Paste it below in place of the placeholder
+//
+// Until then, submissions open the user's email client with a pre-formatted
+// email to info@inscendai.com — works immediately, no setup required.
+const FORMSPREE_URL = 'https://formspree.io/f/xpqbzdaw';
+
+const bookingForm = document.getElementById('bookingForm');
+const bookingSuccess = document.getElementById('bookingSuccess');
+const formError = document.getElementById('bf-error');
+
+// Prefill from calculator
+document.getElementById('r-book')?.addEventListener('click', () => {
+  const btn = document.getElementById('r-book');
+  const select = document.getElementById('bf-package');
+  const pkgName = btn.dataset.prefillPkg;
+  const pkgSize = btn.dataset.prefillSize;
+  const pkgPrice = btn.dataset.prefillPrice;
+  if (select && pkgName) {
+    // try to find a matching option
+    let matched = false;
+    for (const opt of select.options) {
+      if (opt.value.startsWith(pkgName)) {
+        select.value = opt.value;
+        matched = true;
+        break;
+      }
+    }
+    // for custom orders, pick the custom option
+    if (!matched && pkgSize > 75) select.value = 'Custom (76+ bins)';
+  }
+});
+
+if (bookingForm) {
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formError.hidden = true;
+    formError.textContent = '';
+
+    // simple validation
+    if (!bookingForm.checkValidity()) {
+      formError.textContent = 'Please fill in all required fields above.';
+      formError.hidden = false;
+      bookingForm.reportValidity();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(bookingForm));
+    const submitBtn = bookingForm.querySelector('button[type="submit"]');
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const isFormspreeConfigured = !FORMSPREE_URL.includes('REPLACE_WITH');
+    let submittedToFormspree = false;
+
+    if (isFormspreeConfigured) {
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          body: new FormData(bookingForm),
+          headers: { Accept: 'application/json' }
+        });
+        submittedToFormspree = res.ok;
+      } catch (err) {
+        // network failed — fall through to mailto
+      }
+    }
+
+    if (submittedToFormspree) {
+      showSuccess();
+    } else {
+      // Fallback: open mailto with structured email
+      const subject = `Loop booking request — ${data.package || 'package TBD'} on ${data.date || 'date TBD'}`;
+      const body = `New booking request from website
+==============================
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Move date: ${data.date}
+
+Package: ${data.package}
+Pickup address: ${data.pickup_address}
+Drop-off address: ${data.dropoff_address || '(same as pickup)'}
+
+Notes:
+${data.notes || '(none)'}
+
+— Sent from the Loop booking form
+`;
+      const mailto = `mailto:info@inscendai.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      // Show success after brief delay so the email client has time to open
+      setTimeout(showSuccess, 800);
+    }
+  });
+}
+
+function showSuccess() {
+  bookingForm.hidden = true;
+  bookingSuccess.hidden = false;
+  bookingSuccess.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
